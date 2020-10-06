@@ -1,6 +1,6 @@
 # RESTHeart and NGINX with SSL
 
-This repository shows an example of NGINX as a SSL frontend for [RESTHeart](https://github.com/SoftInstigate/restheart/) 4.0.
+This repository shows an example of NGINX as a SSL frontend for [RESTHeart](https://github.com/SoftInstigate/restheart/).
 
 It uses Docker images to setup a complete stack made with NGINX, RESTHeart and MongoDB.
 
