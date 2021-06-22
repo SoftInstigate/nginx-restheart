@@ -15,32 +15,31 @@ docker-compose up
 To test that it works with `curl`:
 
 ```bash
-curl -k -u admin:secret https://localhost/ping
+curl --insecure https://localhost/ping
 
-{"msg":"Hello World!"}
+Greetings from RESTHeart!
 ```
 
-To test that it works with `httpie`:
+The `--insecure` parameter is necessary because we are using a self-signed certifcate.
+
+To test that it works with `http`:
 
 ```bash
-http --verify no -a admin:secret https://localhost/ping
-
+ http --verify=no https://localhost/ping
+ 
 HTTP/1.1 200 OK
 Access-Control-Allow-Credentials: true
 Access-Control-Allow-Origin: *
-Access-Control-Expose-Headers: Location, ETag, X-Powered-By
+Access-Control-Expose-Headers: Location, ETag, Auth-Token, Auth-Token-Valid-Until, Auth-Token-Location, X-Powered-By
 Connection: keep-alive
 Content-Encoding: gzip
-Content-Length: 42
-Content-Type: application/json
-Date: Tue, 16 Jul 2019 14:36:22 GMT
-Server: nginx/1.17.1
+Content-Length: 45
+Content-Type: text/plain
+Date: Tue, 22 Jun 2021 09:06:02 GMT
+Server: nginx/1.21.0
 X-Powered-By: restheart.org
 
-{
-    "msg": "Hello World!"
-}
-
+Greetings from RESTHeart!
 ```
 
 To stop:
