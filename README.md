@@ -20,7 +20,7 @@ curl --insecure https://localhost/ping
 Greetings from RESTHeart!
 ```
 
-The `--insecure` parameter is necessary because we are using a self-signed certifcate.
+The `--insecure` parameter is necessary because we are using a self-signed certificate.
 
 To test that it works with `http`:
 
