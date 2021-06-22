@@ -25,7 +25,7 @@ The `--insecure` parameter is necessary because we are using a self-signed certi
 To test that it works with `http`:
 
 ```bash
- http --verify=no https://localhost/ping
+http --verify=no https://localhost/ping
  
 HTTP/1.1 200 OK
 Access-Control-Allow-Credentials: true
