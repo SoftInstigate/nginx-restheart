@@ -9,13 +9,13 @@ NGINX acts as a HTTPS reverse proxy for RESTHeart and it uses a self-signed cert
 To create the stack:
 
 ```bash
-$ docker-compose up
+docker-compose up
 ```
 
 To test that it works with `curl`:
 
 ```bash
-$ curl -k -u admin:secret https://localhost/ping
+curl -k -u admin:secret https://localhost/ping
 
 {"msg":"Hello World!"}
 ```
@@ -23,7 +23,7 @@ $ curl -k -u admin:secret https://localhost/ping
 To test that it works with `httpie`:
 
 ```bash
-$ http --verify no -a admin:secret https://localhost/ping
+http --verify no -a admin:secret https://localhost/ping
 
 HTTP/1.1 200 OK
 Access-Control-Allow-Credentials: true
@@ -46,11 +46,11 @@ X-Powered-By: restheart.org
 To stop:
 
 ```bash
-$ docker-compose stop
+docker-compose stop
 ```
 
 To clean-up:
 
 ```bash
-$ docker-compose down
+docker-compose down
 ```
