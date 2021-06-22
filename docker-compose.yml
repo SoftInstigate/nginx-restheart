@@ -16,13 +16,12 @@ services:
       - $PWD:/etc/nginx/conf.d
     ports:
       - "443:443"
-      - "80:80"
-    image: nginx
+    image: nginx:1.21
     networks:
       - backend
 
   restheart:
-    image: softinstigate/restheart:4.0.0
+    image: softinstigate/restheart:6.0.3
     container_name: restheart
     depends_on:
       - mongodb
@@ -32,13 +31,11 @@ services:
       - "8080:8080"
 
   mongodb:
-    image: mongo:4.0
+    image: mongo:4.4
     container_name: restheart-mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: restheart
       MONGO_INITDB_ROOT_PASSWORD: R3ste4rt!
     command: --bind_ip_all --auth
-    volumes:
-      - restheart-datadb:/data/db
     networks:
       - backend
