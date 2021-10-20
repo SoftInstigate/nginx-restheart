@@ -1,11 +1,5 @@
 version: "3"
 
-networks:
-  backend:
-
-volumes:
-  restheart-datadb:
-
 services:
   nginx:
     container_name: nginx-proxy
@@ -17,25 +11,27 @@ services:
     ports:
       - "443:443"
     image: nginx:1.21
-    networks:
-      - backend
 
   restheart:
-    image: softinstigate/restheart:6.0.3
-    container_name: restheart
+    image: softinstigate/restheart:6.1
+    environment:
+      MONGO_URI: mongodb://mongodb
+    command: ["--envFile", "/opt/restheart/etc/default.properties"]
     depends_on:
       - mongodb
-    networks:
-      - backend
+      - mongodb-init
     ports:
       - "8080:8080"
 
   mongodb:
-    image: mongo:4.4
-    container_name: restheart-mongo
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: restheart
-      MONGO_INITDB_ROOT_PASSWORD: R3ste4rt!
-    command: --bind_ip_all --auth
-    networks:
-      - backend
+    image: mongo:5.0
+    command: ["--bind_ip_all", "--replSet", "rs0"]
+
+  ### Initialize MongoDB as a single node Replica Set
+  mongodb-init:
+    image: mongo:5.0
+    depends_on:
+      - mongodb
+    entrypoint: >-
+      bash -c "for i in {1..10}; do mongo --host mongodb --eval 
+      'if (!rs.status().ok) rs.initiate();' && break || sleep 3; done"
