@@ -13,7 +13,7 @@ services:
     image: nginx:1.21
 
   restheart:
-    image: softinstigate/restheart:6.1
+    image: softinstigate/restheart:6.3
     environment:
       MONGO_URI: mongodb://mongodb
     command: ["--envFile", "/opt/restheart/etc/default.properties"]
